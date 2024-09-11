@@ -46,6 +46,7 @@ namespace ServerSideApp.Services
                 {
                     using var ms = new MemoryStream();
                     using XtraReport report = ReportsFactory.Reports[url]();
+                    report.SaveLayoutToXml(ms);
                     return ms.ToArray();
                 }
                 throw new DevExpress.XtraReports.Web.ClientControls.FaultException(string.Format("Could not find report '{0}'.", url));
