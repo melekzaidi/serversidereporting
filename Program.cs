@@ -19,6 +19,7 @@ using Microsoft.Extensions.Hosting;
 using ServerSideApp.Services;
 using ServerSideApp.Data;
 using DevExpress.XtraCharts;
+using DevExpress.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDevExpressControls();
@@ -63,6 +64,8 @@ builder.Services.ConfigureReportingServices(configurator => {
     });
     configurator.ConfigureWebDocumentViewer(viewerConfigurator => {
         viewerConfigurator.UseCachedReportSourceBuilder();
+        DeserializationSettings.RegisterTrustedClass(typeof(CommandeClientCleanArch.Reporting.Data.Dsprocessus));
+        DeserializationSettings.RegisterTrustedAssembly(typeof(CommandeClientCleanArch.Reporting.Data.Dsprocessus).Assembly);
         //viewerConfigurator.RegisterConnectionProviderFactory<CustomSqlDataConnectionProviderFactory>();
     });
 });
