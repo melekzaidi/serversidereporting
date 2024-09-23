@@ -20,6 +20,7 @@ using ServerSideApp.Services;
 using ServerSideApp.Data;
 using DevExpress.XtraCharts;
 using DevExpress.Utils;
+using DevExpress.AspNetCore.Reporting.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDevExpressControls();
@@ -53,6 +54,12 @@ builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericReposi
 builder.Services.AddScoped<IProcessusServices, ProcessusServices>();*/
 #endregion
 
+builder.Services.Configure<LoggerOptions>(logOptions => {
+    logOptions.LogMachineName = true;
+    logOptions.Prefix = "START: ";
+    logOptions.LogTimeStamp = true;
+    logOptions.Suffix = " :END";
+});
 // Uncomment the following line if you run the Custom Export example.
 builder.Services.AddSingleton<WebDocumentViewerOperationLogger, MyOperationLogger>();
 builder.Services.AddMvc();
